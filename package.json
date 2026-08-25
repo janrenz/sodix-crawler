@@ -1,0 +1,24 @@
+{
+  "name": "sodix-crawler",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vollstaendiger Crawler fuer die SODIX GraphQL API v3",
+  "type": "module",
+  "bin": {
+    "sodix-crawl": "./bin/sodix-crawl.mjs"
+  },
+  "scripts": {
+    "crawl": "node bin/sodix-crawl.mjs all",
+    "metadata": "node bin/sodix-crawl.mjs metadata",
+    "dims": "node bin/sodix-crawl.mjs dictionary sources publishers collections me",
+    "stats": "node bin/sodix-crawl.mjs stats",
+    "amb": "node bin/sodix-to-amb.mjs",
+    "amb:cc": "node bin/sodix-to-amb.mjs --filter cc -o data/amb-cc.jsonl --report data/amb-cc-report.json",
+    "events": "vendor/amb-nostr-converter/dist/cli/index.js amb:nostr data/amb-cc.jsonl -o data/events.jsonl",
+    "publish:dry": "node bin/nostr-publish.mjs -i data/events.jsonl",
+    "vendor:build": "cd vendor/amb-nostr-converter && npm install && npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
